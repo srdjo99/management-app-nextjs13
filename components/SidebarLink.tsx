@@ -15,6 +15,7 @@ const SidebarLink = ({ link }) => {
     isActive = true;
   }
 
+  // because of serialization
   const Icon = icons[link.icon];
 
   return (
@@ -29,3 +30,5 @@ const SidebarLink = ({ link }) => {
     </Link>
   );
 };
+
+export default SidebarLink;
