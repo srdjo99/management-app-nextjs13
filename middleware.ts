@@ -12,7 +12,7 @@ const verifyJWT = async (jwt) => {
   return payload;
 };
 
-export default async function middleware(req, res) {
+export default async function middleware(req) {
   const { pathname } = req.nextUrl;
 
   if (
@@ -20,7 +20,7 @@ export default async function middleware(req, res) {
     pathname.startsWith('/api') ||
     pathname.startsWith('/static') ||
     pathname.startsWith('/signin') ||
-    pathname.startsWidth('/register') ||
+    pathname.startsWith('/register') ||
     PUBLIC_FILE.test(pathname)
   ) {
     return NextResponse.next();
@@ -34,7 +34,7 @@ export default async function middleware(req, res) {
   }
 
   try {
-    await verifyJWT(jwt);
+    await verifyJWT(jwt.value);
     return NextResponse.next();
   } catch (error) {
     console.log(error);

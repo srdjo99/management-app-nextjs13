@@ -35,14 +35,19 @@ const AuthForm = ({ mode }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (mode === 'register') {
-      await register(formState);
-    } else {
-      await signin(formState);
-    }
+    try {
+      if (mode === 'register') {
+        await register(formState);
+        console.log('yolo');
+      } else {
+        await signin(formState);
+      }
 
-    setFormState(initial);
-    router.replace('/home');
+      router.push('/home');
+      setFormState(initial);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const content = mode === 'register' ? registerContent : signinContent;

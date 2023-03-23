@@ -26,11 +26,9 @@ export default async function signin(
           maxAge: 60 * 60 * 24 * 7,
         })
       );
-      res.status(201);
-      res.end();
     }
+    return res.status(201).json({ message: 'Successfully signed in!' });
   } else {
-    res.status(402);
-    res.end();
+    return res.status(402).json({ message: 'Wrong credentials' });
   }
 }
