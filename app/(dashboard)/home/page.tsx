@@ -7,8 +7,26 @@ import { getUserFromCookie } from '@/lib/auth';
 import { db } from '@/lib/db';
 import Greeting from '@/components/Greeting';
 import GreetingSkeleton from '@/components/GreetingSkeleton';
+import ProjectCard from '@/components/ProjectCard';
 
-export default function Home() {
+const getData = async () => {
+  await delay(2000);
+  const user = await getUserFromCookie(cookies());
+  const projects = await db.project.findMany({
+    where: {
+      ownerId: user?.id,
+    },
+    include: {
+      tasks: true,
+    },
+  });
+
+  return { projects };
+};
+
+export default async function Home() {
+  const { projects } = await getData();
+
   return (
     <div className='w-full h-full pr-6 overflow-y-auto'>
       <div className='h-full items-stretch justify-center min-h-[content]'>
@@ -18,6 +36,13 @@ export default function Home() {
           </Suspense>
         </div>
         <div className='flex flex-wrap items-center mt-3 -m-3 flex-2 grow'>
+          {projects.map((project) => (
+            <div key={project.id} className='w-1/3 p-3'>
+              <Link href={`/project/${project.id}`}>
+                <ProjectCard project={project} />
+              </Link>
+            </div>
+          ))}
           <div className='w-1/3 p-3'></div>
         </div>
         <div className='flex w-full mt-6 flex-2 grow'>
