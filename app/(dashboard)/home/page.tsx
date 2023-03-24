@@ -10,7 +10,7 @@ import GreetingSkeleton from '@/components/GreetingSkeleton';
 
 export default function Home() {
   return (
-    <div className='h-full pr-6 overflow-y-auto w-1/1'>
+    <div className='w-full h-full pr-6 overflow-y-auto'>
       <div className='h-full items-stretch justify-center min-h-[content]'>
         <div className='flex flex-1 grow'>
           <Suspense fallback={<GreetingSkeleton />}>

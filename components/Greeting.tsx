@@ -5,7 +5,7 @@ import Button from './Button';
 import Card from './Card';
 
 const getData = async () => {
-  await delay(4000);
+  await delay(5000);
   const user = await getUserFromCookie(cookies());
   return user;
 };
