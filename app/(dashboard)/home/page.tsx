@@ -8,6 +8,7 @@ import { db } from '@/lib/db';
 import Greeting from '@/components/Greeting';
 import GreetingSkeleton from '@/components/GreetingSkeleton';
 import ProjectCard from '@/components/ProjectCard';
+import TaskCard from '@/components/TaskCard';
 
 const getData = async () => {
   await delay(2000);
@@ -46,7 +47,9 @@ export default async function Home() {
           <div className='w-1/3 p-3'></div>
         </div>
         <div className='flex w-full mt-6 flex-2 grow'>
-          <div className='w-full'></div>
+          <div className='w-full'>
+            <TaskCard />
+          </div>
         </div>
       </div>
     </div>
