@@ -6,13 +6,16 @@ import { delay } from '@/lib/async';
 import { getUserFromCookie } from '@/lib/auth';
 import { db } from '@/lib/db';
 import Greeting from '@/components/Greeting';
+import GreetingSkeleton from '@/components/GreetingSkeleton';
 
 export default function Home() {
   return (
     <div className='h-full pr-6 overflow-y-auto w-1/1'>
       <div className='h-full items-stretch justify-center min-h-[content]'>
         <div className='flex flex-1 grow'>
-          <Greeting />
+          <Suspense fallback={<GreetingSkeleton />}>
+            <Greeting />
+          </Suspense>
         </div>
         <div className='flex flex-wrap items-center mt-3 -m-3 flex-2 grow'>
           <div className='w-1/3 p-3'></div>
